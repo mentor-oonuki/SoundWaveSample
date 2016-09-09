@@ -10,15 +10,17 @@ public class SpectrumAnalyzer : MonoBehaviour
 
     private AudioSource audio_;
 
+    private float[] spectrum;
+
     void Start()
     {
+        spectrum = new float[resolution];
         audio_ = GetComponent<AudioSource>();
         audio_.Play();
     }
 
     void Update()
     {
-        float[] spectrum = new float[resolution];
         audio_.GetSpectrumData(spectrum, 0, FFTWindow.BlackmanHarris);
 
         var deltaFreq = AudioSettings.outputSampleRate / resolution;
